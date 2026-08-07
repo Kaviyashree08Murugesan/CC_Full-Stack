@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inline CSS Example</title>
+</head>
+<body>
+
+    <h1 style="color: blue;">Welcome to CSS</h1>
+
+    <p style="color: green; font-size: 20px;">
+        This is an Inline CSS example.
+    </p>
+
+    <button style="background-color: red; color: white; padding: 10px;">
+        Click Me
+    </button>
+
+</body>
+</html>
