@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile Finder</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <i class="fa-brands fa-github brand-icon"></i>
+                <h1>GitHub <span>Finder</span></h1>
+            </div>
+            <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="usernameInput" placeholder="Search GitHub username... (e.g. octocat)" autocomplete="off">
+            <button id="searchBtn">
+                <span>Search</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Feedback & Content Section -->
+        <main class="content-area">
+            <!-- Loading Indicator -->
+            <div id="loadingState" class="state-container hidden">
+                <div class="spinner"></div>
+                <p>Fetching profile data...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="state-container hidden">
+                <div class="error-icon">
+                    <i class="fa-solid fa-user-slash"></i>
+                </div>
+                <h3 id="errorMessage">User Not Found</h3>
+                <p>Please check the username and try searching again.</p>
+            </div>
+
+            <!-- Profile Card -->
+            <div id="profileCard" class="profile-card hidden">
+                <div class="profile-header">
+                    <div class="avatar-wrapper">
+                        <img id="avatar" src="" alt="Profile Picture">
+                    </div>
+                    <div class="user-main-info">
+                        <h2 id="name">Name</h2>
+                        <a id="usernameLink" href="#" target="_blank" rel="noopener noreferrer" class="user-handle">@username</a>
+                        <p class="join-date"><i class="fa-regular fa-calendar"></i> Joined <span id="joinedDate">Jan 2020</span></p>
+                    </div>
+                </div>
+
+                <p id="bio" class="bio-text">User bio goes here...</p>
+
+                <!-- Stats Bar -->
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Repositories</span>
+                        <span id="publicRepos" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Followers</span>
+                        <span id="followers" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Following</span>
+                        <span id="following" class="stat-value">0</span>
+                    </div>
+                </div>
+
+                <!-- Profile Metadata List -->
+                <div class="meta-grid">
+                    <div class="meta-item" id="metaLocation">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="locationText">Not Available</span>
+                    </div>
+                    <div class="meta-item" id="metaBlog">
+                        <i class="fa-solid fa-link"></i>
+                        <a id="blogLink" href="#" target="_blank" rel="noopener noreferrer">Not Available</a>
+                    </div>
+                    <div class="meta-item" id="metaTwitter">
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <span id="twitterText">Not Available</span>
+                    </div>
+                    <div class="meta-item" id="metaCompany">
+                        <i class="fa-solid fa-building"></i>
+                        <span id="companyText">Not Available</span>
+                    </div>
+                </div>
+
+                <!-- Recent Repositories Section -->
+                <div class="recent-repos-section">
+                    <h3><i class="fa-solid fa-code-fork"></i> Top Recent Repositories</h3>
+                    <div id="reposList" class="repos-grid">
+                        <!-- Dynamic Repo Cards appended here -->
+                    </div>
+                </div>
+
+                <!-- Action Footer -->
+                <div class="profile-actions">
+                    <a id="profileBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                        <i class="fa-brands fa-github"></i> View Full Profile on GitHub
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
