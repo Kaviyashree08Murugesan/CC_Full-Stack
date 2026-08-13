@@ -3,128 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Profile Finder</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <title>React Hooks Examples</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .hooks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .card p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            margin: 5px;
+        }
+        button:hover {
+            background: #764ba2;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 100%;
+            font-size: 0.95em;
+        }
+        .output {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            color: #333;
+            font-weight: 500;
+        }
+        .counter {
+            font-size: 1.5em;
+            color: #667eea;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+        .todo-list {
+            list-style: none;
+            margin: 10px 0;
+        }
+        .todo-item {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #667eea;
+        }
+        .delete-btn {
+            background: #ff6b6b;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+        .delete-btn:hover {
+            background: #ee5a52;
+        }
+        .status {
+            color: #27ae60;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="background-glow"></div>
-    
-    <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="brand">
-                <i class="fa-brands fa-github brand-icon"></i>
-                <h1>GitHub <span>Finder</span></h1>
-            </div>
-            <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-        </header>
-
-        <!-- Search Bar -->
-        <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" id="usernameInput" placeholder="Search GitHub username... (e.g. octocat)" autocomplete="off">
-            <button id="searchBtn">
-                <span>Search</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </button>
+    <div class="container">
+        <h1>⚛️ React Hooks Examples</h1>
+        <div class="hooks-grid">
+            <div id="useState-example"></div>
+            <div id="useEffect-example"></div>
+            <div id="useContext-example"></div>
+            <div id="useReducer-example"></div>
+            <div id="useRef-example"></div>
+            <div id="useMemo-example"></div>
         </div>
-
-        <!-- Feedback & Content Section -->
-        <main class="content-area">
-            <!-- Loading Indicator -->
-            <div id="loadingState" class="state-container hidden">
-                <div class="spinner"></div>
-                <p>Fetching profile data...</p>
-            </div>
-
-            <!-- Error State -->
-            <div id="errorState" class="state-container hidden">
-                <div class="error-icon">
-                    <i class="fa-solid fa-user-slash"></i>
-                </div>
-                <h3 id="errorMessage">User Not Found</h3>
-                <p>Please check the username and try searching again.</p>
-            </div>
-
-            <!-- Profile Card -->
-            <div id="profileCard" class="profile-card hidden">
-                <div class="profile-header">
-                    <div class="avatar-wrapper">
-                        <img id="avatar" src="" alt="Profile Picture">
-                    </div>
-                    <div class="user-main-info">
-                        <h2 id="name">Name</h2>
-                        <a id="usernameLink" href="#" target="_blank" rel="noopener noreferrer" class="user-handle">@username</a>
-                        <p class="join-date"><i class="fa-regular fa-calendar"></i> Joined <span id="joinedDate">Jan 2020</span></p>
-                    </div>
-                </div>
-
-                <p id="bio" class="bio-text">User bio goes here...</p>
-
-                <!-- Stats Bar -->
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-label">Repositories</span>
-                        <span id="publicRepos" class="stat-value">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Followers</span>
-                        <span id="followers" class="stat-value">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Following</span>
-                        <span id="following" class="stat-value">0</span>
-                    </div>
-                </div>
-
-                <!-- Profile Metadata List -->
-                <div class="meta-grid">
-                    <div class="meta-item" id="metaLocation">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span id="locationText">Not Available</span>
-                    </div>
-                    <div class="meta-item" id="metaBlog">
-                        <i class="fa-solid fa-link"></i>
-                        <a id="blogLink" href="#" target="_blank" rel="noopener noreferrer">Not Available</a>
-                    </div>
-                    <div class="meta-item" id="metaTwitter">
-                        <i class="fa-brands fa-x-twitter"></i>
-                        <span id="twitterText">Not Available</span>
-                    </div>
-                    <div class="meta-item" id="metaCompany">
-                        <i class="fa-solid fa-building"></i>
-                        <span id="companyText">Not Available</span>
-                    </div>
-                </div>
-
-                <!-- Recent Repositories Section -->
-                <div class="recent-repos-section">
-                    <h3><i class="fa-solid fa-code-fork"></i> Top Recent Repositories</h3>
-                    <div id="reposList" class="repos-grid">
-                        <!-- Dynamic Repo Cards appended here -->
-                    </div>
-                </div>
-
-                <!-- Action Footer -->
-                <div class="profile-actions">
-                    <a id="profileBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                        <i class="fa-brands fa-github"></i> View Full Profile on GitHub
-                    </a>
-                </div>
-            </div>
-        </main>
     </div>
 
-    <!-- Custom JS -->
-    <script src="script.js"></script>
+    <script type="text/babel">
+        // ============ useState Hook Example ============
+        function CounterComponent() {
+            const [count, setCount] = React.useState(0);
+
+            return (
+                <div className="card">
+                    <h2>useState Hook</h2>
+                    <p>Manage component state with the useState hook.</p>
+                    <div className="counter">Count: {count}</div>
+                    <button onClick={() => setCount(count + 1)}>Increment</button>
+                    <button onClick={() => setCount(count - 1)}>Decrement</button>
+                    <button onClick={() => setCount(0)}>Reset</button>
+                </div>
+            );
+        }
+
+        // ============ useEffect Hook Example ============
+        function EffectComponent() {
+            const [seconds, setSeconds] = React.useState(0);
+            const [isRunning, setIsRunning] = React.useState(false);
+
+            React.useEffect(() => {
+                let interval;
+                if (isRunning) {
+                    interval = setInterval(() => {
+                        setSeconds(s => s + 1);
+                    }, 1000);
+                }
+                return () => clearInterval(interval);
+            }, [isRunning]);
+
+            return (
+                <div className="card">
+                    <h2>useEffect Hook</h2>
+                    <p>Handle side effects like timers and subscriptions.</p>
+                    <div className="counter">Time: {seconds}s</div>
+                    <button onClick={() => setIsRunning(!isRunning)}>
+                        {isRunning ? 'Stop' : 'Start'}
+                    </button>
+                    <button onClick={() => setSeconds(0)}>Reset</button>
+                </div>
+            );
+        }
+
+        // ============ useContext Hook Example ============
+        const ThemeContext = React.createContext('light');
+
+        function ContextComponent() {
+            const [theme, setTheme] = React.useState('light');
+
+            return (
+                <ThemeContext.Provider value={theme}>
+                    <div className="card">
+                        <h2>useContext Hook</h2>
+                        <p>Share values across components without prop drilling.</p>
+                        <div className="output">Current Theme: {theme}</div>
+                        <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+                            Toggle Theme
+                        </button>
+                        <ContextConsumer />
+                    </div>
+                </ThemeContext.Provider>
+            );
+        }
+
+        function ContextConsumer() {
+            const theme = React.useContext(ThemeContext);
+            return (
+                <div className="status">
+                    ✓ Theme consumed: {theme}
+                </div>
+            );
+        }
+
+        // ============ useReducer Hook Example ============
+        const initialState = { count: 0 };
+
+        function reducer(state, action) {
+            switch (action.type) {
+                case 'ADD':
+                    return { count: state.count + action.payload };
+                case 'SUBTRACT':
+                    return { count: state.count - action.payload };
+                case 'RESET':
+                    return { count: 0 };
+                default:
+                    return state;
+            }
+        }
+
+        function ReducerComponent() {
+            const [state, dispatch] = React.useReducer(reducer, initialState);
+
+            return (
+                <div className="card">
+                    <h2>useReducer Hook</h2>
+                    <p>Manage complex state logic with reducer functions.</p>
+                    <div className="counter">Count: {state.count}</div>
+                    <button onClick={() => dispatch({ type: 'ADD', payload: 5 })}>
+                        Add 5
+                    </button>
+                    <button onClick={() => dispatch({ type: 'SUBTRACT', payload: 3 })}>
+                        Subtract 3
+                    </button>
+                    <button onClick={() => dispatch({ type: 'RESET' })}>Reset</button>
+                </div>
+            );
+        }
+
+        // ============ useRef Hook Example ============
+        function RefComponent() {
+            const inputRef = React.useRef(null);
+            const [value, setValue] = React.useState('');
+
+            const handleFocus = () => {
+                inputRef.current?.focus();
+            };
+
+            const handleClear = () => {
+                if (inputRef.current) {
+                    inputRef.current.value = '';
+                    setValue('');
+                }
+            };
+
+            return (
+                <div className="card">
+                    <h2>useRef Hook</h2>
+                    <p>Access DOM elements and persist values across renders.</p>
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        placeholder="Type something..."
+                        onChange={(e) => setValue(e.target.value)}
+                    />
+                    <div className="output">Input value: {value || '(empty)'}</div>
+                    <button onClick={handleFocus}>Focus Input</button>
+                    <button onClick={handleClear}>Clear Input</button>
+                </div>
+            );
+        }
+
+        // ============ useMemo Hook Example ============
+        function MemoComponent() {
+            const [count, setCount] = React.useState(0);
+            const [todos, setTodos] = React.useState(['Learn React', 'Master Hooks']);
+
+            const expensiveValue = React.useMemo(() => {
+                console.log('Computing expensive value...');
+                return count * 2;
+            }, [count]);
+
+            const addTodo = () => {
+                setTodos([...todos, `Todo ${todos.length + 1}`]);
+            };
+
+            return (
+                <div className="card">
+                    <h2>useMemo Hook</h2>
+                    <p>Optimize performance by memoizing expensive calculations.</p>
+                    <div className="counter">Count: {count}</div>
+                    <div className="output">Computed Value: {expensiveValue}</div>
+                    <button onClick={() => setCount(count + 1)}>Increment</button>
+                    <button onClick={addTodo}>Add Todo (triggers re-render)</button>
+                    <p style={{ marginTop: '10px', fontSize: '0.85em', color: '#999' }}>
+                        ({todos.length} todos)
+                    </p>
+                </div>
+            );
+        }
+
+        // ============ Render Components ============
+        const root = ReactDOM.createRoot(document.getElementById('useState-example'));
+        root.render(<CounterComponent />);
+
+        const root2 = ReactDOM.createRoot(document.getElementById('useEffect-example'));
+        root2.render(<EffectComponent />);
+
+        const root3 = ReactDOM.createRoot(document.getElementById('useContext-example'));
+        root3.render(<ContextComponent />);
+
+        const root4 = ReactDOM.createRoot(document.getElementById('useReducer-example'));
+        root4.render(<ReducerComponent />);
+
+        const root5 = ReactDOM.createRoot(document.getElementById('useRef-example'));
+        root5.render(<RefComponent />);
+
+        const root6 = ReactDOM.createRoot(document.getElementById('useMemo-example'));
+        root6.render(<MemoComponent />);
+    </script>
 </body>
 </html>
