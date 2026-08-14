@@ -1,0 +1,226 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #222;
+}
+
+
+/* Navbar */
+
+.navbar {
+  height: 70px;
+  background: #2c3e6b;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 50px;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  color: #ffd166;
+}
+
+
+/* Main Container */
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 50px 30px;
+}
+
+
+/* Home */
+
+.home {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.home h1 {
+  font-size: 42px;
+  color: #2c3e6b;
+  margin-bottom: 15px;
+}
+
+.home p {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+
+/* Buttons */
+
+.button,
+.view-button,
+.back-button {
+  display: inline-block;
+
+  text-decoration: none;
+
+  padding: 12px 20px;
+
+  border-radius: 8px;
+
+  font-weight: bold;
+}
+
+.button {
+  background: #2c3e6b;
+  color: white;
+}
+
+.button:hover {
+  background: #1f2d50;
+}
+
+
+/* Student List */
+
+h2 {
+  color: #2c3e6b;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.student-list {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  );
+
+  gap: 25px;
+}
+
+
+/* Student Card */
+
+.student-card {
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 12px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.student-card h3 {
+  color: #2c3e6b;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.student-card p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.view-button {
+  background: #2c3e6b;
+  color: white;
+}
+
+.view-button:hover {
+  background: #1f2d50;
+}
+
+
+/* Student Details */
+
+.student-detail {
+  max-width: 600px;
+  margin: auto;
+}
+
+.detail-box {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 12px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+  margin-bottom: 25px;
+}
+
+.detail-box p {
+  margin-bottom: 15px;
+
+  font-size: 18px;
+}
+
+.back-button {
+  background: #2c3e6b;
+  color: white;
+}
+
+.back-button:hover {
+  background: #1f2d50;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .home h1 {
+    font-size: 30px;
+  }
+
+  .container {
+    padding: 30px 20px;
+  }
+
+}
